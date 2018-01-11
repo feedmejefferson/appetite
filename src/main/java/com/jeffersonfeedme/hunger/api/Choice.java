@@ -3,26 +3,26 @@ package com.jeffersonfeedme.hunger.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Choice {
-    private String first;
-    private String second;
+    private String a;
+    private String b;
 
     public Choice() {
         // Jackson deserialization
     }
 
-    public Choice(String first, String second) {
-        this.first = first;
-        this.second = second;
+    public Choice(String a, String b) {
+        this.a = a;
+        this.b = b;
     }
 
     @JsonProperty
-    public String getFirst() {
-        return first;
+    public String getA() {
+        return a;
     }
 
     @JsonProperty
-    public String getSecond() {
-        return second;
+    public String getB() {
+        return b;
     }
 }
 

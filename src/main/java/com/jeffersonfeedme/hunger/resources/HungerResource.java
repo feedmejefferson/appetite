@@ -20,7 +20,7 @@ public class HungerResource {
     @GET
     @Timed
     public Choice feedMe(@QueryParam("lastChoice") Optional<String> lastChoice) {
-        return new Choice("Pizza", "Ice Cream");
+        return new Choice("0000105.jpg", "0000129.jpg");
     }
 }
 
