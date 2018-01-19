@@ -1,17 +1,23 @@
 package com.jeffersonfeedme.hunger.resources;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
 import java.util.Optional;
 
-class HungerResourceTest {
+import org.junit.Test;
+
+import com.jeffersonfeedme.hunger.api.Choice;
+
+public class HungerResourceTest {
 
     @Test
-    void test() {
+    public void testFeedMe() {
         HungerResource res = new HungerResource();
-        assertEquals(11,res.feedMe(Optional.empty()).getA().length());
-        assertEquals(11,res.feedMe(Optional.empty()).getB().length());
+        Choice response = res.feedMe(Optional.of(20), Optional.empty(), Optional.empty());
+        assertEquals("The random image name should be 11 characters long.", 11, response.getA().length());
+        assertEquals("The random image name should be 11 characters long.", 11, response.getB().length());
+        assertEquals("The search session returned should be the same as the one passed in.", 20,
+                response.getSearchSession());
     }
 
 }

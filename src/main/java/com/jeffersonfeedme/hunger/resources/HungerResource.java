@@ -19,15 +19,28 @@ import java.util.Optional;
 public class HungerResource {
 
     private static Logger logger = LoggerFactory.getLogger(HungerResource.class);
+    private final static int SOURCE_IMAGES_COUNT = 200;
+    private final static int MAX_SESSION_ID = Integer.MAX_VALUE;
 
     public HungerResource() {
     }
 
     @GET
     @Timed
-    public Choice feedMe(@QueryParam("chosen") Optional<String> chosen) {
-        logger.info("chosen=" + chosen.orElse("NA"));
-        return new Choice(String.format("%07d", 1 + (int)(Math.random() * 200)) + ".jpg",
-                String.format("%07d", 1 + (int)(Math.random() * 200)) + ".jpg");
+    public Choice feedMe(@QueryParam("searchSession") Optional<Integer> requestSession,
+            @QueryParam("chosen") Optional<String> chosen,
+            @QueryParam("notChosen") Optional<String> notChosen) {
+        
+        logger.info("chosen={} notChosen={} searchSession={}", chosen.orElse("NA"), notChosen.orElse("NA"), requestSession.orElse(-1));
+        int searchSession = requestSession.orElse((int)(Math.random() * MAX_SESSION_ID));
+        int a = 1 + (int)(Math.random() * SOURCE_IMAGES_COUNT);
+        int b = 1 + (int)(Math.random() * SOURCE_IMAGES_COUNT);
+        while(b == a) {
+            b = 1 + (int)Math.random() * SOURCE_IMAGES_COUNT;
+        }
+        
+        return new Choice(String.format("%07d.jpg", a),
+                String.format("%07d.jpg", b),
+                searchSession);
     }
 }
