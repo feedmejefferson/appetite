@@ -1,6 +1,8 @@
 package com.jeffersonfeedme.hunger.resources;
 
 import com.jeffersonfeedme.hunger.api.Choice;
+import com.jeffersonfeedme.hunger.core.Cafeteria;
+import com.jeffersonfeedme.hunger.core.Food;
 import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.GET;
@@ -19,10 +21,11 @@ import java.util.Optional;
 public class HungerResource {
 
     private static Logger logger = LoggerFactory.getLogger(HungerResource.class);
-    private final static int SOURCE_IMAGES_COUNT = 200;
     private final static int MAX_SESSION_ID = Integer.MAX_VALUE;
+    private Cafeteria cafe;
 
-    public HungerResource() {
+    public HungerResource(Cafeteria cafe) {
+        this.cafe = cafe;
     }
 
     @GET
@@ -33,14 +36,12 @@ public class HungerResource {
         
         logger.info("chosen={} notChosen={} searchSession={}", chosen.orElse("NA"), notChosen.orElse("NA"), requestSession.orElse(-1));
         int searchSession = requestSession.orElse((int)(Math.random() * MAX_SESSION_ID));
-        int a = 1 + (int)(Math.random() * SOURCE_IMAGES_COUNT);
-        int b = 1 + (int)(Math.random() * SOURCE_IMAGES_COUNT);
+        Food a = cafe.getRandomFood();
+        Food b = cafe.getRandomFood();
         while(b == a) {
-            b = 1 + (int)Math.random() * SOURCE_IMAGES_COUNT;
+            b = cafe.getRandomFood();
         }
         
-        return new Choice(String.format("%07d.jpg", a),
-                String.format("%07d.jpg", b),
-                searchSession);
+        return new Choice(a.getImage(), b.getImage(), searchSession);
     }
 }

@@ -1,10 +1,22 @@
 package com.jeffersonfeedme.hunger;
 
-import io.dropwizard.Configuration;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.validator.constraints.*;
-import javax.validation.constraints.*;
+import com.jeffersonfeedme.hunger.core.Cafeteria;
+
+import io.dropwizard.Configuration;
 
 public class HungerConfiguration extends Configuration {
-    // TODO: implement service configuration
+
+    @JsonProperty
+    @NotNull
+    @Valid
+    private Cafeteria cafeteria;
+
+    public Cafeteria getCafeteria() {
+        return cafeteria;
+    }
+
 }

@@ -23,10 +23,9 @@ public class HungerApplication extends Application<HungerConfiguration> {
     }
 
     @Override
-    public void run(final HungerConfiguration configuration,
-                    final Environment environment) {
-        final HungerResource resource = new HungerResource(
-            );
-            environment.jersey().register(resource);    }
+    public void run(final HungerConfiguration configuration, final Environment environment) {
+        final HungerResource resource = new HungerResource(configuration.getCafeteria());
+        environment.jersey().register(resource);
+    }
 
 }
