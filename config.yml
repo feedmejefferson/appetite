@@ -1,7 +1,22 @@
 logging:
-  level: INFO
-  loggers:
-    com.jeffersonfeedme: DEBUG
+  level: WARN
+  appenders:
+    - type: file
+      currentLogFilename: logs/hunger_log
+      archivedLogFilenamePattern: logs/hunger_log.%d.gz
+      archivedFileCount: 5
+server:
+  requestLog:
+    appenders:
+      - type: file
+        currentLogFilename: logs/access_log
+        archivedLogFilenamePattern: logs/access_log.%d.gz
+  applicationConnectors:
+  - type: http 
+    port: 9000
+  adminConnectors:
+  - type: http
+    port: 9001
 cafeteria:
   food-list:
     - 0000002.jpg

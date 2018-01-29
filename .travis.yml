@@ -1,1 +1,10 @@
+sudo: required
+
 language: java
+
+services: 
+  - docker
+
+script:
+  - mvn test -B
+  - docker-compose build
