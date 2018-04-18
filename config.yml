@@ -4,7 +4,7 @@ logging:
     - type: file
       currentLogFilename: logs/hunger_log
       archivedLogFilenamePattern: logs/hunger_log.%d.gz
-      archivedFileCount: 5
+      archivedFileCount: 50
 server:
   requestLog:
     appenders:
