@@ -31,7 +31,7 @@ public class HungerApplication extends Application<HungerConfiguration> {
 
     @Override
     public void run(final HungerConfiguration configuration, final Environment environment) {
-        final HungerResource resource = new HungerResource(configuration.getCafeteria());
+        final HungerResource resource = new HungerResource(configuration.getCafeteria(), configuration.getStratifiedCafeteria());
         environment.jersey().register(resource);
         configureCors(environment);
     }

@@ -29,7 +29,7 @@ public class HungerResourceTest {
     public void testFeedMe() throws Exception {
         File yml = new File(Resources.getResource("fixtures/cafeteria.yml").toURI());
         HungerConfiguration config = factory.build(yml);
-        HungerResource res = new HungerResource(config.getCafeteria());
+        HungerResource res = new HungerResource(config.getCafeteria(), config.getStratifiedCafeteria());
         Choice response = res.feedMe(Optional.of(20), Optional.empty(), Optional.empty());
         assertEquals("The random image name should be 11 characters long.", 11, response.getA().length());
         assertEquals("The random image name should be 11 characters long.", 11, response.getB().length());
