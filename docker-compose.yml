@@ -2,9 +2,10 @@ version: "3"
 services:
   hunger:
     build: .
-    image: feedmejefferson/hunger:0.2
+    image: feedmejefferson/hunger:0.3
     volumes:
       - ${PWD}:/usr/src/hunger/logs
+      - ${PWD}/config.yml:/usr/src/hunger/config.yml
     ports:
       - "9000:9000"
       - "9001:9001"
