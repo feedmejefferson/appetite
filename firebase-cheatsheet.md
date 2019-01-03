@@ -8,4 +8,15 @@ Just a quick cheat sheet with some common firebase CLI functions. Keep in mind I
     
 If you aren't already authenticated this will open a browser window to authenticate with. 
  
- 
+## serve locally
+
+from the `functions/` directory of the project, run:
+
+    npm run serve
+    
+## deploying to `prod`
+
+    npm run deploy
+
+> what ever happened to teting/staging? 
+
