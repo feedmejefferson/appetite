@@ -11,21 +11,25 @@ const cors = require('cors')({origin: true});
 function getSession(): number {
   return Math.floor(Math.random() * 2147483647);
 }
-function getRandomFood(): number {
-  return Math.floor(Math.random() * IMAGES.length);
+function getRandomFood(otherThan?: number): number {
+  let food = Math.floor(Math.random() * IMAGES.length);    
+  while(food === otherThan) {
+    food = Math.floor(Math.random() * IMAGES.length);
+  }
+  return food;
 }
-function log(request: Request): void {
-  console.log(request.ip + " \"" + request.url + "\" \"" + request.headers["user-agent"] + "\" " + new Date().getTime());
+function log(request: Request, session: number): void {
+  console.log(`${request.ip} ${session} "${request.url}" "${request.headers["user-agent"]}" ${new Date().getTime()}`);
 }
 export const hunger = functions.https.onRequest((request: Request, response: Response) => {
   cors(request, response, () => {
-    log(request);
     let session: number = request.query.searchSession;
-    if (session == null) {
+    if (!session) {
       session = getSession(); 
     }
+    log(request, session);
     const a=getRandomFood();
-    const b=getRandomFood();
+    const b=getRandomFood(a);
     response.json({"searchSession":session,"a":IMAGES[a],"b":IMAGES[b]});
   });
 });
