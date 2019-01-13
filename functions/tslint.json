@@ -54,10 +54,7 @@
 
     // Do not allow any imports for modules that are not in package.json. These will almost certainly fail when
     // deployed.
-    "no-implicit-dependencies": true,
-
-    // The 'this' keyword can only be used inside of classes.
-    "no-invalid-this": true,
+    "no-implicit-dependencies": [ true, "dev" ],
 
     // Do not allow strings to be thrown because they will not include stack traces. Throw Errors instead.
     "no-string-throw": true,
@@ -79,6 +76,9 @@
     // These rules should almost never be needed, but may be included due to legacy code.
     // They are left as a warning to avoid frustration with blocked deploys when the developer
     // understand the warning and wants to deploy anyway.
+
+    // The 'this' keyword can only be used inside of classes.
+    "no-invalid-this": {"severity": "warning"},
 
     // Warn when an empty interface is defined. These are generally not useful.
     "no-empty-interface": {"severity": "warning"},
