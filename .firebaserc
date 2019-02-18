@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "hunger-2a124"
+    "production": "feedme-jefferson",
+    "staging": "feedme-stage"
   }
 }
